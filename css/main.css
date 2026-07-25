@@ -1,0 +1,8 @@
+body {
+  font-size: 16px;
+  line-height: 1;
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+  /* 단어 단위의 줄 바꿈 처리를 어떤 방식으로 할 것인가 를 설정하는 속성. 
+     keep-all : 한중일 텍스트에서는 줄을 바꿀 때 단어를 끊지 않음.  */
+  word-break: keep-all;
+}
