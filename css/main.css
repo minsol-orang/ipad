@@ -32,6 +32,26 @@ header ul.menu li a {
   opacity: .8;
   text-decoration: none;
 }
+header ul.menu li.apple-logo a, 
+header ul.menu li.search-starter a, 
+header ul.menu li.basket-starter a {
+ width: 14px; 
+ /* 글자가 구조적으로 존재하지만 화면에서 안 보이게 처리  */
+ /* 구조적으로 글자가 남아있는 상태가 되므로 웹 접근성을 통해 텍스트도 제공할 수 있고 , 
+ 대표적으로 시각장애인들이 사용하는 스크린 리더기에서도 글씨가 읽힐 수 있음  */
+ text-indent: -9999px;
+ background-repeat: no-repeat;
+ background-position: center 13px;
+}
+header ul.menu li.apple-logo a {
+  background-image: url("../images/header_apple.svg");
+}
+header ul.menu li.search-starter a {
+  background-image: url("../images/header_search.svg");
+}
+header ul.menu li.basket-starter a {
+  background-image: url("../images/header_bag.svg");
+}
 header ul.menu li a:hover {
   opacity: 1;
 }
