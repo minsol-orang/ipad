@@ -1,10 +1,43 @@
+html.fixed {
+  position: fixed;
+  width: 100%;
+  overflow-y: scroll;
+}
 body {
+  color: #1d1d1d;
   font-size: 16px;
   line-height: 1;
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   /* 단어 단위의 줄 바꿈 처리를 어떤 방식으로 할 것인가 를 설정하는 속성. 
      keep-all : 한중일 텍스트에서는 줄을 바꿀 때 단어를 끊지 않음.  */
   word-break: keep-all;
+}
+a {
+  color: #1d1d1d;
+  text-decoration: none;
+}
+
+/* Btn */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  background-color: #0071e3;
+  cursor: pointer;
+}
+.btn:hover {
+  opacity: .7;
+}
+.btn:focus {
+  box-shadow: 0 0 0 4px #81b9f1;
 }
 
 /* Header */
@@ -14,24 +47,274 @@ header {
 header .inner {
   max-width: 1020px;
   margin: 0 auto;
+  position: relative;
 }
 header ul.menu {
   height: 44px;
   display: flex;
   justify-content: space-between;
 }
-header ul.menu li {
+header ul.menu > li {
   display: flex;
+  position: relative;
+  transition: .4s;
 }
-header ul.menu li a {
+header ul.menu > li > a {
   padding: 0 10px;
   font-size: 11px;
   display: flex;
   align-items: center;
   color: #f5f5f5;
-  opacity: .8;
+  opacity: 0.8;
   text-decoration: none;
 }
-header ul.menu li a:hover {
+header ul.menu > li.apple-logo > a,
+header ul.menu > li.search-starter > a,
+header ul.menu > li.basket-starter > a {
+  width: 14px;
+  /* 글자가 구조적으로 존재하지만 화면에서 안 보이게 처리  */
+  /* 구조적으로 글자가 남아있는 상태가 되므로 웹 접근성을 통해 텍스트도 제공할 수 있고 , 
+ 대표적으로 시각장애인들이 사용하는 스크린 리더기에서도 글씨가 읽힐 수 있음  */
+  text-indent: -9999px;
+  background-repeat: no-repeat;
+  background-position: center 13px;
+}
+header ul.menu > li.apple-logo > a {
+  background-image: url("../images/header_apple.svg");
+}
+header ul.menu > li.search-starter > a {
+  background-image: url("../images/header_search.svg");
+}
+header ul.menu > li.basket-starter > a {
+  background-image: url("../images/header_bag.svg");
+}
+header ul.menu > li > a:hover {
   opacity: 1;
+}
+
+/* Header / Menu / Basket */
+header .basket {
+  /* display: none; */
+  width: 290px;
+  padding: 10px 20px;
+  border: 1px solid #d2d2d2;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: -6px;
+  /* 전환 효과에 적용되는 속성에는 display는 속해있지 않음  
+  visibility는 화면에 요소가 보일 것인지 그렇지 않을 것인지 결정하지만, 
+  opacity 속성과 함께 전환 효과를 사용하여 애니메이션 처리가 가능함 */
+  visibility: hidden;
+  transition: 0.4s;
+  opacity: 0;
+}
+header .basket.show {
+  /* display: block; */
+  visibility: visible;
+  opacity: 1;
+}
+header .basket .arrow {
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  overflow: hidden;
+}
+header .basket .arrow::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 1px solid #d2d2d2;
+  background-color: #fff;
+  transform: rotate(45deg);
+  transform-origin: 0 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+header .basket .message {
+  padding: 30px 0;
+  font-size: 13px;
+  color: #6e6e6e;
+  text-align: center;
+}
+header .basket ul {
+  margin-top: 10px;
+}
+header .basket ul li {
+  border-top: 1px solid #d2d2d2;
+}
+header .basket ul li a {
+  display: block;
+  padding: 14px;
+  font-size: 13px;
+  color: #0071e3;
+}
+header .basket ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Header / Search */
+header .search-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: .4s;
+}
+header .search {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+header .search .shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+header .search .textfield {
+  position: relative;
+}
+header .search input {
+  width: 100%;
+  height: 44px;
+  padding: 0 40px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  background-color: transparent;
+  font-size: 17px;
+  color: #fff;
+}
+header .search .search-icon {
+  width: 40px;
+  height: 44px;
+  background-image: url("../images/header_search.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.4;
+}
+header .search .search-closer {
+  width: 40px;
+  height: 44px;
+  background-image: url("../images/header_close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.4;
+  cursor: pointer;
+}
+header .search .search-closer:hover {
+  opacity: 1;
+}
+header .search .autocompletes {
+  width: 100%;
+  padding: 26px 40px 20px;
+  border-radius: 0 0 18px 18px;
+  box-sizing: border-box;
+  background-color: #fff;
+  position: absolute;
+  top: 44px;
+  left: 0;
+}
+header .search .autocompletes h3 {
+  font-size: 12px;
+  color: #6e6e6e;
+  margin-bottom: 12px;
+}
+header .search .autocompletes ul li a {
+  display: block;
+  margin: 0 -14px;
+  padding: 10px 0 10px 30px;
+  font-size: 14px;
+  cursor: pointer;
+}
+header .search .autocompletes ul li:hover a {
+  background-color: #f5f5f5;
+  color: #0071e3;
+}
+header .search input, 
+header .search .search-icon, 
+header .search .autocompletes h3,
+header .search .autocompletes li {
+  transition: .6s;
+  transform: translate(100px, 0);
+}
+header.searching ul.menu > li {
+  transform: scale(.7);
+  opacity: 0;
+}
+header.searching .search-wrap {
+  visibility: visible;
+  opacity: 1;
+  transition: .2s;
+}
+header.searching .search input, 
+header.searching .search .search-icon, 
+header.searching .search .autocompletes h3,
+header.searching .search .autocompletes li {
+  transition-delay: .2s;
+  transform: translate(0, 0);
+}
+
+
+/* Navigation */
+nav {
+  background-color: rgba(255, 255, 255, 。7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #d2d2d2;
+  position: sticky;
+  top: 0;
+  z-index: 8;
+}
+nav .inner {
+  max-width: 1000px;
+  height: 52px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+nav h1 {
+  flex-grow: 1;
+  font-size: 22px;
+  font-weight: 500;
+
+}
+nav .menu {
+  display: flex;
+  gap: 12px;
+  margin-right: 18px;
+}
+nav .menu li {
+
+}
+nav .menu li a {
+  display: block;
+  padding: 6px;
+  font-size: 11px;
+}
+nav .menu li:hover a {
+  color: #0071e3;
+}
+nav .menu li.active a {
+  opacity: .5;
+  cursor: default;
+}
+nav .menu li.active:hover a {
+  color: #1d1d1d;
 }
