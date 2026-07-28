@@ -16,6 +16,11 @@ a {
   color: #1d1d1d;
   text-decoration: none;
 }
+img {
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 
 /* Btn */
 .btn {
@@ -317,4 +322,46 @@ nav .menu li.active a {
 }
 nav .menu li.active:hover a {
   color: #1d1d1d;
+}
+
+
+/* Hero */
+.hero {
+
+}
+.hero .inner {
+
+}
+.hero h1 {
+
+}
+.hero figure {
+
+}
+.hero figure img {
+
+}
+.hero figure figcaption {
+
+}
+.hero figure figcaption .caption-camera {
+
+}
+.hero figure figcaption .caption-chip {
+
+}
+.hero figure figcaption .caption-storage {
+
+}
+.hero h2 {
+
+}
+.hero p.pricing {
+
+}
+.hero p.description {
+
+}
+.hero .links {
+
 }
