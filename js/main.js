@@ -72,3 +72,20 @@ function hideSearching() {
   // 검색바가 사라질 때 input 요소도 함께 초기화 시킴 
   searchInputEl.value = ""
 }
+
+
+// 요소의 가시성 관찰
+const io = new IntersectionObserver(function(entries) {
+  entries.forEach(function (entry) {
+    // 요소가 화면에 보이지 않는 경우 함수를 종료하겠다는 조건문
+    if (!entry.isIntersecting) {
+      return
+    }
+    entry.target.classList.add('show')
+  })
+})
+
+const infoEls = document.querySelectorAll('.info')
+infoEls.forEach(function(el) {
+  io.observe(el)
+})
