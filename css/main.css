@@ -629,6 +629,13 @@ transform: translate(-25px, 0);
 .camera .stage figure {
   transform: translate(90px, 0);
 }
+.camera .stage video {
+  position: absolute;
+  top: 36px;
+  left: 76px;
+  mask-image: url("../images/camera_video_mask.png");
+  -webkit-mask-image: url("../images/camera_video_mask.png");
+}
 .camera .stage figcaption {
   width: 130px;
   height: 110px;
