@@ -807,11 +807,11 @@ nav .menu li.active:hover a {
   margin-top: 44px;
   align-items: flex-end;
 }
-.ipados.figures {
+.ipados .figures {
     height: 782px;
     display: flex;
 }
-.ipados.figures > div {
+.ipados .figures > div {
   flex-grow: 1;
   position: relative;
 }
@@ -834,7 +834,7 @@ nav .menu li.active:hover a {
   transform: translate(257px, 497px);
 }
 .ipados .figure-quick-note figure {
-  ransform: translate(-625px, 232px);
+  transform: translate(-625px, 232px);
 }
 .ipados .figure-quick-note figcaption {
   width: 82px;
