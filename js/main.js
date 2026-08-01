@@ -1,5 +1,6 @@
 // import 라는 키워드를 사용하는 js를 html 파일에서 불러오려면 html script태그 내부에 tyoe이라는 속성의 module이라는 값을 넣어 사용햐야 함
 import ipads from "../data/ipads.js";
+import navigations from '../data/navigations.js'
 
 // 장바구니 !
 const basketStarterEl = document.querySelector("header .basket-starter");
@@ -144,3 +145,30 @@ ipads.forEach(function (ipad) {
   // itemsEl에 append라는 메소드를 사용하여 실제 요소를 넣을 수 있음
   itemsEl.append(itemEl);
 });
+
+
+const navigationsEl = document.querySelector('footer .navigations')
+navigations.forEach(function (nav) {
+  const mapEl = document.createElement('div')
+  mapEl.classList.add('map')
+
+  let mapList = ''
+  nav.maps.forEach(function (map) {
+    mapList += /* html */`
+    <li>
+      <a href="${map.url}">${map.name}</a>
+  </li>
+  `
+})
+
+mapEl.innerHTML = /* html */`
+  <h3>
+    <span class="text">${nav.title}</span>
+  </h3>
+  <ul>
+    ${mapList}
+</ul>
+`
+
+navigationsEl.append(mapEl)
+})
