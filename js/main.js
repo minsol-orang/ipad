@@ -48,8 +48,7 @@ searchShadowEl.addEventListener("click", hideSearching);
 
 function showSearch() {
   headerEl.classList.add("searching");
-  // documentElement = 해당 문서의 최상위 요소를 의미(<html></html>)
-  document.documentElement.classList.add("fixed");
+  stopScroll()
   headerMenuEls.reverse().forEach(function (el, index) {
     // 최대 .4초를 설정하기 위해서 .4를 곱해준 후 요소의 개수만큼을 나눠줌 (0~ 0.4)
     el.style.transitionDelay = (index * 0.4) / headerMenuEls.length + "s";
@@ -64,6 +63,7 @@ function showSearch() {
 }
 function hideSearching() {
   headerEl.classList.remove("searching");
+  playScroll()
   headerMenuEls.reverse().forEach(function (el, index) {
     // 최대 .4초를 설정하기 위해서 .4를 곱해준 후 요소의 개수만큼을 나눠줌 (0~ 0.4)
     el.style.transitionDelay = (index * 0.4) / headerMenuEls.length + "s";
@@ -75,6 +75,26 @@ function hideSearching() {
   // 검색바가 사라질 때 input 요소도 함께 초기화 시킴
   searchInputEl.value = "";
 }
+
+function playScroll() {
+  // documentElement = 해당 문서의 최상위 요소를 의미(<html></html>)
+  document.documentElement.classList.remove('fixed')
+}
+function stopScroll() {
+  document.documentElement.classList.add("fixed");
+}
+
+// 헤더 메뉴 토글 
+const menuStarterEl = document.querySelector('header .menu-starter')
+menuStarterEl.addEventListener('click', function () {
+  if(headerEl.classList.contains('menuing')) {
+    headerEl.classList.remove('menuing')
+    playScroll()
+  } else {
+    headerEl.classList.add('menuing')
+    stopScroll()
+  }
+})
 
 // 요소의 가시성 관찰
 const io = new IntersectionObserver(function (entries) {
