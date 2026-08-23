@@ -3,6 +3,7 @@ html {
   --color-black: #000;
   --color-font: #1d1d1d;
   --color-font-darkgray: #6e6e6e;
+  --color-font-middlegray: #b7b7b7;
   --color-lightgray: #f5f5f5;
   --color-link: #0071e3;
   --color-link-focus: #81b9f1;
@@ -39,7 +40,7 @@ p {
 }
 sup {
   margin-right: 6px;
-  font-size: .7em;
+  font-size: 0.7em;
   vertical-align: top;
 }
 
@@ -222,7 +223,6 @@ a.link::after {
   font-size: 19.5px;
 }
 
-
 /* Whitebox */
 .whitebox {
   max-width: 1386px;
@@ -251,7 +251,6 @@ a.link::after {
   display: block;
   margin-top: 26px;
 }
-
 
 /* Header */
 header {
@@ -381,7 +380,6 @@ header .search-wrap {
   top: 0;
   left: 0;
   width: 100%;
-  display: none;
   visibility: hidden;
   opacity: 0;
   transition: 0.4s;
@@ -465,6 +463,12 @@ header .search .autocompletes ul li:hover a {
   background-color: var(--color-section);
   color: var(--color-link);
 }
+header .clone-menu {
+  display : none;
+} 
+
+/* Search Animation */
+/* 스타일을 한 번에 지정 */
 header .search input,
 header .search .search-icon,
 header .search .autocompletes h3,
@@ -504,7 +508,7 @@ header.searching .search .autocompletes li {
     width: 100%;
     height: 0;
     background-color: var(--color-header);
-    transition: .4s;
+    transition: 0.4s;
   }
   header ul.menu > li {
     display: none;
@@ -520,10 +524,85 @@ header.searching .search .autocompletes li {
     height: 1px;
     background-color: var(--color-white);
     margin-bottom: 6px;
-    transition: .4s;
+    transition: 0.4s;
   }
   header ul.menu > li.menu-starter span:last-child {
     margin-bottom: 0;
+  }
+  header .search-wrap {
+    padding: 0 20px 14px;
+    border-bottom: 1px solid var(--color-header);
+    box-sizing: border-box;
+    top: var(--header-heigth);
+  }
+  header .search {
+    max-width: 590px;
+  }
+  header .shadow {
+    display: none;
+  }
+  header .search .textfield {
+    border-radius: 10px;
+    background-color: #1d1d1d;
+  }
+  header .search input,
+  header .search .search-icon,
+  header .search .autocompletes h3,
+  header .search .autocompletes li {
+    transform: translate(0, 0);
+  }
+  header .search .autocompletes {
+    top: 58px;
+    padding: 26px 0 20px;
+    background-color: transparent;
+    visibility: hidden;
+    opacity: 0;
+  }
+  header .search .autocompletes ul li {
+    border-bottom: 1px solid var(--color-header);
+  }
+  header .search .autocompletes ul li:last-child {
+    border-bottom: none;
+  }
+  header .search .autocompletes ul li a {
+    padding: 16px 0 16px 16px;
+    color: var(--color-font-middlegray);
+  }
+  header .search .autocompletes ul li:hover a {
+    background-color: transparent;
+    color: var(--color-link);
+  }
+  header .clone-menu {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 103px;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    transition: .4s;
+    transform: translate(0, -50px);
+  }  
+  header .clone-menu ul {
+    max-width: 590px;
+    margin: 4px auto;
+  }  
+  header .clone-menu ul li {
+    border-bottom: 1px solid var(--color-header);
+  }  
+  header .clone-menu ul li {
+    border-bottom: none;
+  }
+  header .clone-menu ul li a {
+    padding: 16px 0;
+    display: block;
+    font-size: 14px;
+    color: var(--color-font-middlegray);
+  }  
+  header .clone-menu ul li:hover a {
+    color: var(--color-white);
   }
   header.menuing {
     background-color: var(--color-black);
@@ -541,6 +620,15 @@ header.searching .search .autocompletes li {
   }
   header.menuing ul.menu > li.menu-starter span:last-child {
     transform: translate(0, -3.5px) rotate(-45deg);
+  }
+  header.menuing .search-wrap {
+    visibility: visible;
+    opacity: 1;
+  } 
+  header.menuing .clone-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0);
   }
 }
 
@@ -591,7 +679,6 @@ nav .menu li.active:hover a {
 main {
   overflow-x: hidden;
 }
-
 
 /* Hero */
 .hero {
@@ -821,10 +908,9 @@ main {
   transform: translate(27px, 905px);
 }
 
-
 /* Wireless */
 .wireless {
- margin-top: 202px;
+  margin-top: 202px;
 }
 /* Wireless / Facetime */
 .wireless .facetime h1 {
@@ -855,7 +941,6 @@ main {
   background-image: url("../images/wireless_files_caption.png");
   transform: translate(96px, 639px);
 }
-
 
 /* Accessories */
 .accessories {
@@ -892,7 +977,6 @@ main {
   justify-content: space-around;
 }
 
-
 /* iPadOS */
 .ipados {
   margin-top: 212px;
@@ -908,8 +992,8 @@ main {
   align-items: flex-end;
 }
 .ipados .figures {
-    height: 782px;
-    display: flex;
+  height: 782px;
+  display: flex;
 }
 .ipados .figures > div {
   flex-grow: 1;
@@ -925,7 +1009,7 @@ main {
   transform: translate(200px, -38px);
 }
 .ipados .figure-widgets figure {
- transform: translate(237px, 43px);
+  transform: translate(237px, 43px);
 }
 .ipados .figure-widgets figcaption {
   width: 161px;
@@ -966,7 +1050,6 @@ main {
 }
 .apps .figure-masterclass figure {
   transform: translate(578px, -431px);
-
 }
 .apps .figure-masterclass figcaption {
   width: 100px;
@@ -1000,7 +1083,7 @@ main {
   height: 27px;
   background-image: url("../images/apps_books_caption.png");
   transform: translate(397px, 707px);
-} 
+}
 .apps .figure-goodnotes figure {
   transform: translate(-93px, 68px);
 }
@@ -1010,7 +1093,6 @@ main {
   background-image: url("../images/apps_goodnotes_caption.png");
   transform: translate(24px, 690px);
 }
-
 
 /* Privacy */
 .privacy {
@@ -1047,7 +1129,6 @@ main {
   transform: translate(533px, 485px);
 }
 
-
 /* Accessiility */
 .accessibility {
   margin-top: 266px;
@@ -1064,7 +1145,6 @@ main {
 .accessibility figure {
   transform: translate(470px, -620px);
 }
-
 
 /* AR */
 .ar {
@@ -1083,7 +1163,6 @@ main {
   margin-right: 90px;
 }
 
-
 /* Enviroment */
 .environment {
   padding: 20px 20px 0;
@@ -1097,7 +1176,6 @@ main {
 .environment h1 {
   color: #03a10e;
 }
-
 
 /* Accessory Shop */
 .accessory-shop {
@@ -1116,14 +1194,12 @@ main {
   margin-top: 50px;
 }
 
-
 /* Trade */
 .trade {
   padding: 20px 20px 0;
   background-color: var(--color-section);
   text-align: center;
 }
-
 
 /* Compare */
 .compare {
@@ -1160,7 +1236,7 @@ main {
   height: 12px;
   border-radius: 50%;
   background-color: lightgray;
-  box-shadow: inset 1px 3px rgba(0, 0, 0, .1);
+  box-shadow: inset 1px 3px rgba(0, 0, 0, 0.1);
 }
 .compare .item h3.name {
   margin-bottom: 4px;
@@ -1180,7 +1256,6 @@ main {
 .compare .item a.link {
   font-size: 14px;
 }
-
 
 /* Footer */
 footer {
@@ -1264,7 +1339,7 @@ footer .breadcrumbs a:last-child::after {
 }
 /* Footer / Navigations */
 footer .navigations {
-  margin-bottom : 40px;
+  margin-bottom: 40px;
   height: 344px;
   display: flex;
   flex-direction: column;
@@ -1277,7 +1352,7 @@ footer .navigations .map {
 footer .navigations .map:nth-child(6) {
   padding-bottom: 100px;
 }
-footer .navigations .map h3 { 
+footer .navigations .map h3 {
   font-size: 12px;
   font-weight: 600;
 }
@@ -1331,42 +1406,6 @@ footer .legal ul li:last-child::after {
 footer .legal ul li:hover a {
   text-decoration: underline;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @keyframes sprite-icon {
   /* 1~10 */
