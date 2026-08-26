@@ -43,13 +43,15 @@ const searchInputEl = searchWrapEl.querySelector("input");
 const searchDelayEls = [...searchWrapEl.querySelectorAll("li")];
 
 searchStarterEl.addEventListener("click", showSearch);
-searchCloserEl.addEventListener("click", hideSearching);
-searchShadowEl.addEventListener("click", hideSearching);
+searchCloserEl.addEventListener("click", function(event) {
+  event.stopPropagation() 
+  hideSearch()
+});
+searchShadowEl.addEventListener("click", hideSearch);
 
 function showSearch() {
   headerEl.classList.add("searching");
-  // documentElement = 해당 문서의 최상위 요소를 의미(<html></html>)
-  document.documentElement.classList.add("fixed");
+  stopScroll()
   headerMenuEls.reverse().forEach(function (el, index) {
     // 최대 .4초를 설정하기 위해서 .4를 곱해준 후 요소의 개수만큼을 나눠줌 (0~ 0.4)
     el.style.transitionDelay = (index * 0.4) / headerMenuEls.length + "s";
@@ -62,8 +64,9 @@ function showSearch() {
       searchInputEl.focus();
     }, 600));
 }
-function hideSearching() {
+function hideSearch() {
   headerEl.classList.remove("searching");
+  playScroll()
   headerMenuEls.reverse().forEach(function (el, index) {
     // 최대 .4초를 설정하기 위해서 .4를 곱해준 후 요소의 개수만큼을 나눠줌 (0~ 0.4)
     el.style.transitionDelay = (index * 0.4) / headerMenuEls.length + "s";
@@ -74,6 +77,74 @@ function hideSearching() {
   searchDelayEls.reverse();
   // 검색바가 사라질 때 input 요소도 함께 초기화 시킴
   searchInputEl.value = "";
+}
+
+function playScroll() {
+  // documentElement = 해당 문서의 최상위 요소를 의미(<html></html>)
+  document.documentElement.classList.remove('fixed')
+}
+function stopScroll() {
+  document.documentElement.classList.add("fixed");
+}
+
+// 헤더 메뉴 토글 
+const menuStarterEl = document.querySelector('header .menu-starter')
+menuStarterEl.addEventListener('click', function () {
+  if(headerEl.classList.contains('menuing')) {
+    headerEl.classList.remove('menuing')
+    searchInputEl.value = "";     
+    playScroll()
+  } else {
+    headerEl.classList.add('menuing')
+    stopScroll()
+  }
+})
+
+// 헤더 검색 
+const searchTextFieldEl = document.querySelector('header .textfield')
+const searchCancelEl = document.querySelector('header .search-canceler')
+searchTextFieldEl.addEventListener('click', function() {
+  headerEl.classList.add('searching--mobile')
+  searchInputEl.focus()
+})
+searchCancelEl.addEventListener('click', function() {
+  headerEl.classList.remove('searching--mobile')
+})
+
+// window 객체는 결과적으로 화면 전체를 의미하고 거기에서 
+// resize 즉 화면의 크기가 바뀔 때마다 뒷부분에 콜백 함수가 실행이 된다는 의미 
+// innerWidth 는 화면의 가로 너비 정보를 가지고 있는 js 속성 
+window.addEventListener('resize', function () {
+  if (window.innerWidth <= 740) {
+    headerEl.classList.remove('searching')
+  } else {
+    headerEl.classList.remove('searching--mobile')
+  }
+})
+
+const navEl = document.querySelector('nav')
+const navMenuToggleEl = navEl.querySelector('.menu-toggler')
+const navMenuShadowEl = navEl.querySelector('.shadow')
+
+navMenuToggleEl.addEventListener('click', function () {
+  if (navEl.classList.contains('menuing')) {
+    navEl.classList.remove('menuing')
+  } else {
+    navEl.classList.add('menuing')
+  }
+})
+navEl.addEventListener('click', function(event) {
+  event.stopPropagation()
+})
+navMenuShadowEl.addEventListener('click', hideNavMenu)
+window.addEventListener('click', hideNavMenu)
+
+
+function showNavMenu() {
+  navEl.classList.add('menuing')
+}
+function hideNavMenu() {
+  navEl.classList.remove('menuing')
 }
 
 // 요소의 가시성 관찰
