@@ -43,8 +43,11 @@ const searchInputEl = searchWrapEl.querySelector("input");
 const searchDelayEls = [...searchWrapEl.querySelectorAll("li")];
 
 searchStarterEl.addEventListener("click", showSearch);
-searchCloserEl.addEventListener("click", hideSearching);
-searchShadowEl.addEventListener("click", hideSearching);
+searchCloserEl.addEventListener("click", function(event) {
+  event.stopPropagation() 
+  hideSearch()
+});
+searchShadowEl.addEventListener("click", hideSearch);
 
 function showSearch() {
   headerEl.classList.add("searching");
@@ -61,7 +64,7 @@ function showSearch() {
       searchInputEl.focus();
     }, 600));
 }
-function hideSearching() {
+function hideSearch() {
   headerEl.classList.remove("searching");
   playScroll()
   headerMenuEls.reverse().forEach(function (el, index) {
@@ -89,10 +92,33 @@ const menuStarterEl = document.querySelector('header .menu-starter')
 menuStarterEl.addEventListener('click', function () {
   if(headerEl.classList.contains('menuing')) {
     headerEl.classList.remove('menuing')
+    searchInputEl.value = "";     
     playScroll()
   } else {
     headerEl.classList.add('menuing')
     stopScroll()
+  }
+})
+
+// 헤더 검색 
+const searchTextFieldEl = document.querySelector('header .textfield')
+const searchCancelEl = document.querySelector('header .search-canceler')
+searchTextFieldEl.addEventListener('click', function() {
+  headerEl.classList.add('searching--mobile')
+  searchInputEl.focus()
+})
+searchCancelEl.addEventListener('click', function() {
+  headerEl.classList.remove('searching--mobile')
+})
+
+// window 객체는 결과적으로 화면 전체를 의미하고 거기에서 
+// resize 즉 화면의 크기가 바뀔 때마다 뒷부분에 콜백 함수가 실행이 된다는 의미 
+// innerWidth 는 화면의 가로 너비 정보를 가지고 있는 js 속성 
+window.addEventListener('resize', function () {
+  if (window.innerWidth <= 740) {
+    headerEl.classList.remove('searching')
+  } else {
+    headerEl.classList.remove('searching--mobile')
   }
 })
 
