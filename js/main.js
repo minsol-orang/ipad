@@ -235,6 +235,7 @@ navigations.forEach(function (nav) {
 mapEl.innerHTML = /* html */`
   <h3>
     <span class="text">${nav.title}</span>
+    <span class="icon>+</span>
   </h3>
   <ul>
     ${mapList}
@@ -247,3 +248,13 @@ navigationsEl.append(mapEl)
 
 const thisYearEl = document.querySelector('span.this-year')
 thisYearEl.textContent = new Date().getFullYear()
+
+const mapEls = document.querySelectorAll('footer .navigations .map')
+mapEls.forEach(function(el) {
+  const h3El = el.querySelector('h3')
+  h3El.addEventListener('click', function () {
+    // toggle 메소드로 클릭시 active 클래스가 있을 때는 제거해 주고 없을 때는 추가해주는 방식 
+    // 말 그대로 클래스를 토글해줌 
+    el.classList.toggle('active')
+  })
+})
