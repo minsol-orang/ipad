@@ -6,6 +6,9 @@ HTML, CSS, JavaScript를 연습한 프로젝트입니다.
 강의를 들으면서 웹페이지의 구조를 만들고,  
 반응형 레이아웃과 JavaScript 동작을 구현해보았습니다.
 
+배포 링크
+https://ipad-six-eta.vercel.app/
+
 ## Tech Stack
 
 - HTML
